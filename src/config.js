@@ -1,0 +1,1 @@
+export default BASE_URL = 'https://apis.fruitstone.in/cheese/api/exam001?key=%22ARPKG10236%22';
