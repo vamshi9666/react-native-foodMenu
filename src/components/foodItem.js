@@ -2,9 +2,15 @@ import React , {  Component } from 'react';
 import { View, Text} from 'react-native'
 
 export default class FoodItem extends Component {
-    render(){
-        <View style={{display:'flex', padding: 16 }} >
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        return (
 
-        </View>
+            <View style={{ display: 'flex', padding: 16 }} >
+                <Text>{this.props.text}</Text>
+            </View>
+        )
     }
 }
