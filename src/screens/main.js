@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { 
+import {
     View,
     SectionList,
-    Text
+    Text,
+    Image,
+    ScrollView
 } from 'react-native'
-import {connect } from 'react-redux'
+import { connect } from 'react-redux'
 import Header from '../components/Header'
 import { get_data } from '../../redux/actions/app'
 import FoodItem from '../components/foodItem'
@@ -12,9 +14,14 @@ import FoodItem from '../components/foodItem'
 class MainScreen extends Component {
     componentWillMount() {
         this.props.get_data();
-        console.log(this.props);
+        this.sectionList = React.createRef()
+    }
+    componentDidMount() {
+        console.log(this.refs);
+        
     }
     render() {
+
         const catogaries = [];
         this.props.sections.map(one => {
             const section = {
@@ -27,21 +34,34 @@ class MainScreen extends Component {
             <View
                 style={{ margin: 15, paddingTop: 16 }}
             >
-                <Header title={"head"} ></Header>
                 {this.props.sections.length > 0
                     ?
-                    <SectionList
-                        style={{ flex: 1 }}
-                        sections={catogaries}
-                        renderItem={({ item, index, section: { } }) => <Text style={{ width: 300, textAlign: "center", margin: 15 }} key={index}>{item.name}</Text>}
-                        renderSectionHeader={({ section: { title } }) => {
-                            return (
-                                <Text style={{ fontWeight: 'bold', textAlign: "center" }}>{title}</Text>
-                            )
-                        }}
-
-                        keyExtractor={(item, index) => item + index}
-                    />
+                    <ScrollView
+                        showsVerticalScrollIndicator={false}
+                        stickyHeaderIndices={[0]}>
+                        <View style={{ backgroundColor: "#fff" }}>
+                            <Header style={{ backgroundColor: 'blue' }} title={"little italy"} disc={'5th avenue '}  ></Header>
+                            <View style={{ display: "flex", paddingTop: 15, flexDirection: "row", justifyContent: 'space-between' }}>
+                                <Text> Main</Text>
+                                {this.props.sections.map(section => (<Text onPress={() => console.log(this.refs)
+                                 } >{section.name}</Text>))}
+                            </View>
+                        </View>
+                        <SectionList
+                            scrollEnabled={true}
+                            ref="sectionList"
+                            style={{ flex: 1 }}
+                            sections={catogaries}
+                            renderItem={({ item, index, section }) => (<Text style={{ width: 330, textAlign: "center", margin: 15 }} key={index}>{item.name}</Text>)}
+                            renderSectionFooter={() => {
+                                return (
+                                    <View style={{ padding: 15 }} ></View>
+                                )
+                            }}
+                            keyExtractor={(item, index) => item + index}
+                        >
+                         </SectionList>
+                    </ScrollView>
                     :
                     <Text>Loading</Text>
                 }
@@ -56,4 +76,4 @@ const mapStateToProps = (state) => {
         sections: state.sections
     }
 }
-export default connect(mapStateToProps ,{ get_data }) (MainScreen)
+export default connect(mapStateToProps, { get_data })(MainScreen)
