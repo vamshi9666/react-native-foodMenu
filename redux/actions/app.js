@@ -12,7 +12,8 @@ export const get_data = () => {
                 })
                 dispatch({
                     type:"GET_ITEMS",
-                    sections: data
+                    sections: data,
+                    offersNo:res.data.data.offersAvailable
                 })
         })
             .catch(err => {
@@ -21,3 +22,11 @@ export const get_data = () => {
     }
 }
 
+export const add_item_cart = (item) => {
+    return (dispatch, getState) => {
+        dispatch({
+            type:"ADD_ITEM_CART",
+            payload: item
+        })
+    }
+}

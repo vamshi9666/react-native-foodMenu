@@ -1,24 +1,23 @@
 import React, { Component } from "react";
 import {
     View,
-    SectionList,
     Text,
-    Image,
+    Button,
     ScrollView
 } from 'react-native'
+import SectionList from '../components/sectionlist'
 import { connect } from 'react-redux'
 import Header from '../components/Header'
 import { get_data } from '../../redux/actions/app'
-import FoodItem from '../components/foodItem'
+import Cart from '../components/cart'
 
 class MainScreen extends Component {
     componentWillMount() {
         this.props.get_data();
-        this.sectionList = React.createRef()
     }
     componentDidMount() {
         console.log(this.refs);
-        
+
     }
     render() {
 
@@ -32,36 +31,34 @@ class MainScreen extends Component {
         })
         return (
             <View
-                style={{ margin: 15, paddingTop: 16 }}
+                style={{ marginTop: 20, paddingTop: 0 }}
             >
                 {this.props.sections.length > 0
                     ?
-                    <ScrollView
-                        showsVerticalScrollIndicator={false}
-                        stickyHeaderIndices={[0]}>
-                        <View style={{ backgroundColor: "#fff" }}>
-                            <Header style={{ backgroundColor: 'blue' }} title={"little italy"} disc={'5th avenue '}  ></Header>
-                            <View style={{ display: "flex", paddingTop: 15, flexDirection: "row", justifyContent: 'space-between' }}>
-                                <Text> Main</Text>
-                                {this.props.sections.map(section => (<Text onPress={() => console.log(this.refs)
-                                 } >{section.name}</Text>))}
+                    <View>
+                        <ScrollView
+                            showsVerticalScrollIndicator={false}
+                            stickyHeaderIndices={[0]}>
+                            <View style={{ backgroundColor: "#fff", paddingHorizontal:16 }}>
+                                <Header style={{  }} title={"little italy"} disc={'5th avenue '}  ></Header>
+                                <View style={{ flex: 1, borderBottomColor: '#E67E22', paddingTop: 12, borderBottomColor: '#E67E22' }}>
+                                    <ScrollView
+                                        horizontal={true}
+                                        showsHorizontalScrollIndicator={false}
+                                        pagingEnabled={true} >
+                                        <Text style={{ textAlignVertical: 'center', borderStyle:'dashed', borderBottomColor:'#E67E22' }} onPress={() => console.log('Main')} > Main</Text>
+                                        {this.props.sections.map(section => (<Text  style={{ margin: 15 }} key={section.index} onPress={() => console.log(section.name)}>{section.name}</Text>))}
+                                    </ScrollView>
+                                </View>
                             </View>
-                        </View>
-                        <SectionList
-                            scrollEnabled={true}
-                            ref="sectionList"
-                            style={{ flex: 1 }}
-                            sections={catogaries}
-                            renderItem={({ item, index, section }) => (<Text style={{ width: 330, textAlign: "center", margin: 15 }} key={index}>{item.name}</Text>)}
-                            renderSectionFooter={() => {
-                                return (
-                                    <View style={{ padding: 15 }} ></View>
-                                )
-                            }}
-                            keyExtractor={(item, index) => item + index}
-                        >
-                         </SectionList>
-                    </ScrollView>
+                            <SectionList
+                                style={{ marginTop: 8 }}
+                                offers={this.props.offers}
+                                sections={this.props.sections}
+                            />
+                        </ScrollView>
+                        <Cart />
+                    </View>
                     :
                     <Text>Loading</Text>
                 }
@@ -72,7 +69,7 @@ class MainScreen extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        offers: state.offersAvailable,
+        offers: state.offersNo,
         sections: state.sections
     }
 }

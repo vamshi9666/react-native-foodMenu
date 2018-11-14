@@ -10,9 +10,9 @@ class Header extends Component {
    
     render(){
         return (
-            <View style={{display:'flex', justifyContent:'center'}}>
-                <Text style={{fontSize:25, fontStyle:'normal'}}  >{this.props.title}</Text>
-                <Text>{this.props.disc}</Text>
+            <View style={{display:'flex', width:360,paddingTop:8}}>
+                <Text style={{fontSize:18,fontWeight:'bold',textAlign:'left'}}  >{this.props.title}</Text>
+                <Text style={{fontSize:15, fontWeight:'normal'}}>{this.props.disc}</Text>
             </View>
         )
         

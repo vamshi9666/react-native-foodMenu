@@ -1,6 +1,7 @@
 const initialState = {
     cart :[],
     sections:[],
+    offersNo:''
 }
 
 export default function (state = initialState, action) {
@@ -8,7 +9,7 @@ export default function (state = initialState, action) {
         case "ADD_ITEM_CART":
             return {
                 ...state,
-                cart: cart.push(action.payload)
+                cart:[...state.cart, action.payload]
             }
 
         case "REMOVE_ITEM_CART":{
@@ -21,6 +22,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 sections:action.sections,
+                offersNo:action.offersNo
             }
         }
         default:
