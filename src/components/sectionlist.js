@@ -14,10 +14,11 @@ export  default class  SectionList extends Component{
         console.log('props in Section list',this.props.sections);
         return (
             <View style={{ }} >
-                <View style={{ display: "flex", flexDirection: 'row', backgroundColor: '#F2F5FC', justifyContent: 'center', margin: 0 }} >
-                    <Image style={{ width: 50, height: 50 }} source={require('../../assets/Offers.png')} />
-                    <Text style={{ textAlignVertical: 'center', textAlign: "center", fontSize: 15 }} > {offers.toString()} offers Avaliable </Text>
+                <View style={{ display: "flex", flexDirection: 'row', backgroundColor: '#F2F5FC', marginVertical: 21 }} >
+                    <Image style={{ width: 48, height: 48,alignContent:'flex-start', marginLeft:19.5 }} source={require('../../assets/Offers.png')} />
+                    <Text style={{ marginLeft:12, textAlignVertical: 'center', textAlign: "center", fontSize: 15 }} > {offers.toString()} offers Avaliable </Text>
                 </View>
+                <View style={{marginBottom:16, backgroundColor:'#F2F5FC',height:16, marginHorizontal:0}}  ></View>
                 <ScrollView
                     nestedScrollEnabled={true}
                     alwaysBounceVertical={true}

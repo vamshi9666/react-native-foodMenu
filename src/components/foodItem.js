@@ -15,15 +15,15 @@ class FoodItem extends Component {
         const { dish } = this.props
         return (
             <View style={{   padding: 16, display: "flex",textAlignVertical:'center', flexDirection: 'column', alignItems: 'center' }} >
-                <View style={{width:'100%' ,flex: 1, display:'flex', flexDirection:'row'}} >
-                    <Image style={{ width: 20, height: 20, margin: 20, alignSelf:'flex-start' }} source={dish.isVeg ? require('../../assets/veg.png') : require('../../assets/NonVeg.png')} />
+                <View style={{width:'100%' ,flex: 1, display:'flex',marginBottom:25, flexDirection:'row'}} >
+                    <Image style={{ width: 20, height: 20,marginRight:8,  alignSelf:'flex-start' }} source={dish.isVeg ? require('../../assets/veg.png') : require('../../assets/NonVeg.png')} />
                     <Text style={{  textAlignVertical:'center' }} >
                         {dish.name}
                     </Text>
                 </View>
-                <View style={{width:'100%',paddingHorizontal:16, flex: 3,display:'flex',flexDirection:'row', justifyContent:'space-between' }} >
-                    <Text >{dish.price}</Text>
-                    <TouchableOpacity style={{ borderRadius: 10 ,borderWidth:1, width: 64, height: 24, alignSelf: 'flex-end', borderStyle: 'solid', alignSelf: 'flex-end' }} onPress={() => {
+                <View style={{width:'100%', flex: 3,display:'flex',flexDirection:'row', justifyContent:'space-between' }} >
+                    <Text >{dish.price} $</Text>
+                    <TouchableOpacity style={{ borderRadius: 12 ,borderWidth:1,borderColor:'#90A4AE', width: 64, height: 24, alignSelf: 'flex-end', borderStyle: 'solid' }} onPress={() => {
                         this.addItemCart(dish)
                     }} >
                         <Text style={{textAlign:"center", color: '#60B244' }}>Add</Text>

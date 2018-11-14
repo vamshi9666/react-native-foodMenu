@@ -3,7 +3,8 @@ import {
     View,
     Text,
     Button,
-    ScrollView
+    ScrollView,
+    StyleSheet
 } from 'react-native'
 import SectionList from '../components/sectionlist'
 import { connect } from 'react-redux'
@@ -11,16 +12,32 @@ import Header from '../components/Header'
 import { get_data } from '../../redux/actions/app'
 import Cart from '../components/cart'
 
+
+const styles = StyleSheet.create({
+    sectionNavItem:{
+        textAlignVertical: 'center',
+        paddingHorizontal: 24 ,
+        paddingTop:8,
+        paddingBottom:21,
+        borderBottomColor: '#E67E22'
+    }
+})
+
+
 class MainScreen extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            activeSection :null
+        }
+    }
     componentWillMount() {
         this.props.get_data();
     }
     componentDidMount() {
         console.log(this.refs);
-
     }
     render() {
-
         const catogaries = [];
         this.props.sections.map(one => {
             const section = {
@@ -39,15 +56,15 @@ class MainScreen extends Component {
                         <ScrollView
                             showsVerticalScrollIndicator={false}
                             stickyHeaderIndices={[0]}>
-                            <View style={{ backgroundColor: "#fff", paddingHorizontal:16 }}>
-                                <Header style={{  }} title={"little italy"} disc={'5th avenue '}  ></Header>
-                                <View style={{ flex: 1, borderBottomColor: '#E67E22', paddingTop: 12, borderBottomColor: '#E67E22' }}>
+                            <View style={{ backgroundColor: "#fff", paddingHorizontal:0 ,}}>
+                                <Header style={{}} title={"Little italy"} disc={'5th avenue beverly hills'}  ></Header>
+                                <View style={{ flex: 1 , paddingTop: 12 }}>
                                     <ScrollView
                                         horizontal={true}
                                         showsHorizontalScrollIndicator={false}
                                         pagingEnabled={true} >
-                                        <Text style={{ textAlignVertical: 'center', borderStyle:'dashed', borderBottomColor:'#E67E22' }} onPress={() => console.log('Main')} > Main</Text>
-                                        {this.props.sections.map(section => (<Text  style={{ margin: 15 }} key={section.index} onPress={() => console.log(section.name)}>{section.name}</Text>))}
+                                        <Text style={{ ...styles.sectionNavItem, borderBottomWidth:this.state.activeSection== null ? 2 : 0,  }} onPress={() => this.setState({activeSection:null})} > Main</Text>
+                                        {this.props.sections.map(section => (<Text  style={{  ...styles.sectionNavItem,borderBottomWidth: this.state.activeSection ==section.name ? 2 : 0,   }} key={section.index} onPress={() => this.setState({activeSection:section.name})}>{section.name}</Text>))}
                                     </ScrollView>
                                 </View>
                             </View>
@@ -66,6 +83,8 @@ class MainScreen extends Component {
         )
     }
 }
+
+
 
 const mapStateToProps = (state) => {
     return {

@@ -15,7 +15,7 @@ import FoodItem from './foodItem'
         const { id,name, dishes } = this.props;
         return (
             <View style={{ borderTopColor:'red'}}>
-                <Text style={{marginLeft:16, fontSize:22, fontWeight:'normal'}}>{name}</Text>
+                <Text style={{marginLeft:16,marginBottom:16, fontSize:22, fontWeight:'normal'}}>{name}</Text>
                 <View style={{padding:0}}>
                     {
                         dishes.map(dish => (
