@@ -4,7 +4,15 @@ import {} from 'react-redux'
 import Main from './src/screens/main'
 import  {  Provider } from 'react-redux'
 import store from './redux/index'
+import { Font } from 'expo'
 export default class App extends React.Component {
+  componentWillMount(){
+    Font.loadAsync({
+      'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+      'open-sans-semibold': require('./assets/fonts/OpenSans-SemiBold.ttf'),
+      'open-sans-regular': require('./assets/fonts/OpenSans-Regular.ttf')
+    })
+  }
   render() {
     return (
       <View style={styles.container}>

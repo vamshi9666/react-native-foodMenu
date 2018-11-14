@@ -17,16 +17,16 @@ class FoodItem extends Component {
             <View style={{   padding: 16, display: "flex",textAlignVertical:'center', flexDirection: 'column', alignItems: 'center' }} >
                 <View style={{width:'100%' ,flex: 1, display:'flex',marginBottom:25, flexDirection:'row'}} >
                     <Image style={{ width: 20, height: 20,marginRight:8,  alignSelf:'flex-start' }} source={dish.isVeg ? require('../../assets/veg.png') : require('../../assets/NonVeg.png')} />
-                    <Text style={{  textAlignVertical:'center' }} >
+                    <Text style={{  textAlignVertical:'center', fontSize:12, fontFamily:'open-sans-bold' }} >
                         {dish.name}
                     </Text>
                 </View>
                 <View style={{width:'100%', flex: 3,display:'flex',flexDirection:'row', justifyContent:'space-between' }} >
-                    <Text >{dish.price} $</Text>
-                    <TouchableOpacity style={{ borderRadius: 12 ,borderWidth:1,borderColor:'#90A4AE', width: 64, height: 24, alignSelf: 'flex-end', borderStyle: 'solid' }} onPress={() => {
+                    <Text style={{fontSize:12,fontFamily:'open-sans-bold'}} >$ {dish.price}</Text>
+                    <TouchableOpacity style={{ borderRadius: 12 ,borderWidth:1,borderColor:'#90A4AE', alignSelf: 'flex-end' }} onPress={() => {
                         this.addItemCart(dish)
                     }} >
-                        <Text style={{textAlign:"center", color: '#60B244' }}>Add</Text>
+                        <Text style={{textAlign:"center", marginLeft:19,marginRight:19,marginTop:4, marginBottom:3, color: '#60B244', fontFamily:'open-sans-bold', fontSize:12 }}>Add</Text>
                     </TouchableOpacity>
                 </View>
             </View>
