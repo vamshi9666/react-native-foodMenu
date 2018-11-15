@@ -8,7 +8,7 @@ class Cart extends Component{
     }
     render(){
         return (
-            <View style={{display:"flex",height:50,  justifyContent:"center", backgroundColor:'#60B244'}} >
+            <View style={{display:"flex",height:40,  justifyContent:"center", backgroundColor:'#60B244'}} >
                 <Text style={{textAlign:'center',fontSize:12,fontFamily:'open-sans-bold', color:'#FFFFFF'}} > { this.props.cartItems.length} Items | {_.sumBy(this.props.cartItems,'price' )} $ </Text> 
             </View>
         )

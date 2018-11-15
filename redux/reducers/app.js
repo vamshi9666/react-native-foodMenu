@@ -13,9 +13,10 @@ export default function (state = initialState, action) {
             }
 
         case "REMOVE_ITEM_CART":{
+            const index = state.cart.map(x => x.id).indexOf(action.payload)
             return {
                 ...state,
-                cart: cart.filter(item => item.id == action.payload)
+                cart:state.cart.slice(index)
             }
         }
         case "GET_ITEMS":{

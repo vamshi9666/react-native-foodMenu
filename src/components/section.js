@@ -1,15 +1,10 @@
 import React , { Component } from 'react'
-import { connect } from 'react-redux'
-import { add_item_cart} from '../../redux/actions/app'
 import { Text,  View , Image, Button} from 'react-native'
 import FoodItem from './foodItem'
 
  class Section extends Component {
     constructor(props){
         super(props)
-    }
-    addItemCart =(item ) => {
-        this.props.add_item_cart(item)
     }
     render(){
         const { id,name, dishes } = this.props;
@@ -28,4 +23,4 @@ import FoodItem from './foodItem'
     }
 }
 
-export default connect(null, { add_item_cart })(Section)
+export default Section

@@ -68,7 +68,12 @@ class MainScreen extends Component {
                                         pagingEnabled={true} >
                                         <Text style={{ ...styles.sectionNavItem, borderBottomWidth: this.state.activeSection == null ? 2 : 0, }}
                                             onPress={() => {
-                                                this.ScrollRef._scrollViewref.scrollTo({ x: 250, y: 225 })
+                                                this.ScrollRef.scrollToLocation({
+                                                    animated: true,
+                                                    sectionIndex: 3,
+                                                    itemIndex: 0,
+                                                    viewOffset: 28 // height of section header
+                                           })
                                                 this.setState({ activeSection: null })
                                             }}
                                         > Main Course
@@ -89,7 +94,13 @@ class MainScreen extends Component {
                                 sections={this.props.sections}
                             />
                         </ScrollView>
-                        <Cart />
+                        {this.props.cart.length > 0 
+                        ?
+                            <Cart />
+                        :
+                            null
+                        }
+                        
                     </View>
                     :
                     <Text>Loading</Text>
@@ -102,7 +113,8 @@ class MainScreen extends Component {
 const mapStateToProps = (state) => {
     return {
         offers: state.offersNo,
-        sections: state.sections
+        sections: state.sections,
+        cart:state.cart|| []
     }
 }
 export default connect(mapStateToProps, { get_data })(MainScreen)

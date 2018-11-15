@@ -1,6 +1,41 @@
 import React , { Component} from 'react';
 import { View, Text, ScrollView, Image } from 'react-native';
+import { ScrollIntoViewWrapper } from 'react-native-scroll-into-view'
 import Section from './section'
+
+const scrollIntoViewOptions = {
+  
+    // Animate the scrollIntoView() operation 
+    animated: true,
+    
+    // By default, scrollIntoView() calls are throttled a bit because it does not make much sense
+    // to scrollIntoView() 2 elements at the same time (and sometimes even impossible)
+    immediate: false,
+
+  };
+  
+
+class ScrollSection extends Component{
+    constructor(props){
+        super(props);
+    }
+    render(){
+        return (
+            <ScrollView
+                ref={ref => this._scrollViewref = ref}
+                nestedScrollEnabled={true}
+                alwaysBounceVertical={true}
+            >
+                {this.props.sections.map(section => (
+                    <Section key={section.id}  id={section.id} name={section.name} dishes={section.dishes} />
+                ))}
+            </ScrollView>
+        )
+    }
+}
+
+const CustomScroll = ScrollIntoViewWrapper(ScrollSection)
+
 export  default class  SectionList extends Component{
     constructor(props){
         super(props);
@@ -10,9 +45,11 @@ export  default class  SectionList extends Component{
         
        this._scrollViewref.scrollTo({x:0, y :225})
       }
+      renderScrollView(){
+
+      }
     render(){
         const { sections , offers } = this.props;
-        console.log('props in Section list',this.props.sections);
         return (
             <View style={{}} >
                 <View style={{ display: "flex", flexDirection: 'row', backgroundColor: '#F2F5FC', marginVertical: 21 }} >
@@ -22,15 +59,7 @@ export  default class  SectionList extends Component{
                     <Text style={{ marginLeft: 12, textAlignVertical: 'center', textAlign: "center", fontSize: 12, fontFamily: 'open-sans-regular' }} > {offers.toString()} offers Avaliable </Text>
                 </View>
                 <View style={{ marginBottom: 16, backgroundColor: '#F2F5FC', height: 16, marginHorizontal: 0 }}  ></View>
-                <ScrollView
-                    ref={ref=> this._scrollViewref = ref}
-                    nestedScrollEnabled={true}
-                    alwaysBounceVertical={true}
-                >
-                    {sections.map(section => (
-                        <Section key={section.id} onLayout={( ) => console.log('onLayout')} id={section.id} name={section.name} dishes={section.dishes} />
-                    ))}
-                </ScrollView>
+                <CustomScroll sections={sections} scrollIntoViewOptions={scrollIntoViewOptions} />
             </View>
         )
     }
