@@ -3,7 +3,7 @@ const initialState = {
     sections:[],
     offersNo:''
 }
-
+const removeItem = (items, index) => ([ ...items.slice(0, index), ...items.slice(index + 1)]);
 export default function (state = initialState, action) {
     switch (action.type) {
         case "ADD_ITEM_CART":
@@ -13,10 +13,11 @@ export default function (state = initialState, action) {
             }
 
         case "REMOVE_ITEM_CART":{
-            const index = state.cart.map(x => x.id).indexOf(action.payload)
+            const index = state.cart.findIndex(one => one.id === action.payload)
+
             return {
                 ...state,
-                cart:state.cart.slice(index)
+                cart: [...removeItem(state.cart, index)]
             }
         }
         case "GET_ITEMS":{

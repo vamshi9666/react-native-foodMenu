@@ -22,13 +22,12 @@ class FoodItem extends Component {
         this.props.add_item_cart(item)
     }
     removeItemCart = (item) => {
-        console.log(`item removed`);
+        console.log(`item pressed to remove`, item);
         this.props.remove_item_Cart(item)
     }
     render() {
         const { dish } = this.props
         const filter = this.props.cart.find(item => item.id == dish.id)
-        console.log(filter)
         return (
             <View style={{ padding: 16, display: "flex", textAlignVertical: 'center', flexDirection: 'column', alignItems: 'center' }} >
                 <View style={{ width: '100%', flex: 1, display: 'flex', marginBottom: 25, flexDirection: 'row' }} >

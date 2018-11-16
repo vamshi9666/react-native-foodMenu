@@ -33,11 +33,11 @@ export const add_item_cart = (item) => {
 
 export const remove_item_Cart = (item) => {
     return (dispatch, getState) => {
-        const index = getState().cart.findIndex(i => i.id === item.id)
-        console.log(index);
+
+        
         dispatch({
             type:"REMOVE_ITEM_CART",
-            payload:index
+            payload:item.id
         })
     }
 } 
